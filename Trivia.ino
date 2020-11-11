@@ -25,4 +25,15 @@ void loop() {
   // put your main code here, to run repeatedly:
   digitalWrite(greenLight, HIGH);
   digitalWrite(redLight, HIGH);
+  if(digitalRead(button1) == "HIGH"){
+    Serial.println("button presed");
+  }
+
+  if(digitalRead(button2) == "HIGH"){
+    Serial.println("button presed");
+  }
+
+  if(digitalRead(button3) == "HIGH"){
+    Serial.println("button presed");
+  }
 }
