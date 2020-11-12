@@ -41,11 +41,15 @@ void loop() {
     char state = Serial.read ( );    // Reading the data received and saving in the state variable
     
     if(state == '1') { 
-      digitalWrite (redLight, HIGH); 
+      digitalWrite (greenLight, HIGH); 
+      delay(1000);
+      digitalWrite (greenLight, LOW); 
     }  
-    
+
     if (state == '0') {     // If received data is '0', then turn off led
-     digitalWrite (redLight, LOW);
+     digitalWrite (redLight, HIGH);
+     delay(1000);
+     digitalWrite (redLight, LOW); 
     } 
 } 
 

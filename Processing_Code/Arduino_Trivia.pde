@@ -2,7 +2,7 @@ import processing.serial.*;    // Importing the serial library to communicate wi
 
 Serial myPort;      // Initializing a vairable named 'myPort' for serial communication
 
-int level = 0; //level of questions
+int level = -1; //level of questions
 
 String[] questions = {"What is the meaning of life?", "What is 2 + 2?", "How many letters compose: dog?"};
 String[][] optionsList = {  {
@@ -21,7 +21,7 @@ String[][] optionsList = {  {
                               "3"
                             }
                           };
-int[] answers = {1, 3, 2};
+float[] answers = {2, 1, 3};
 
 PFont currentQuestion;
 
@@ -48,10 +48,11 @@ myPort.bufferUntil ( '\n' );   // Receiving the data from the Arduino IDE
 
 void serialEvent  (Serial myPort) {
   String guess = myPort.readStringUntil('\n');
-  int numGuess;
+  println("the input", guess);
+  float numGuess;
   if(guess.length() > 0){
-    numGuess = int(guess);
-    print(guess);
+    numGuess = float(guess);
+    println("the input 2", numGuess);
     setText(numGuess);
   }
 } 
@@ -76,17 +77,19 @@ void draw ( ) {
   }
 }
 
-void setText(int guess){
-  if(level == 0){
-    showOptions = true;
-  }
-  if(level == 1){
+void setText(float guess){
+  
+  if(level > -1){
+    print("the guess", guess);
+    print("the answer", answers[level]);
     if(guess == answers[level]){
       myPort.write('1');
     }else{
-      myPort.write ('0');
+      myPort.write('0');
     }
   }
+  
+  showOptions = true;
   level++;
   print("lvel", level);
   
