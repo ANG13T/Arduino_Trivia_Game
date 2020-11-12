@@ -1,5 +1,5 @@
 import processing.serial.*;    // Importing the serial library to communicate with the Arduino 
-import processing.sound.*;
+
 
 
 Serial myPort;      // Initializing a vairable named 'myPort' for serial communication
@@ -8,24 +8,49 @@ int level = -1; //level of questions
 int score = 0;
 boolean gameCompleted = false;
 
-String[] questions = {"What is the meaning of life?", "What is 2 + 2?", "How many letters compose: dog?"};
+String[] questions = {"When was the Arduino created?", "How many Digital I/O pins does the Arduino Uno have?", "Which country was the Arduino created at?", "What can you make with an Arduino?", "What programming language does Arduino use?", "What is the memory limit of the Arduino Uno?", "True or False: Arduino requires 6 to 20V?", "What microcontroller does the Arduino Uno use?"};
 String[][] optionsList = {  {
-                              "8",
-                              "42",
-                              "5"
+                              "1996",
+                              "2005",
+                              "2016"
                             }, 
                             {
-                              "4",
+                              "14",
                               "8",
-                              "77"
+                              "25"
                             }, 
                             {
-                              "6",
-                              "90",
-                              "3"
+                              "USA",
+                              "China",
+                              "Italy"
+                            },
+                            {
+                              "Gadgets",
+                              "Robots",
+                              "Both"
+                            },
+                            {
+                              "Java",
+                              "C",
+                              "Python"
+                            },
+                            {
+                              "32K",
+                              "54K",
+                              "2GB"
+                            },
+                            {
+                              "True",
+                              "False",
+                              "IDK"
+                            },
+                            {
+                              "ATX Mega",
+                              "8051",
+                              "ATmega328P"
                             }
                           };
-float[] answers = {2, 1, 3};
+float[] answers = {2, 1, 3, 3, 2, 1, 1, 3};
 
 PFont currentQuestion;
 
@@ -34,8 +59,6 @@ String currentText = "Press any button to continue.";
 PImage icon;
 PImage options;
 
-SoundFile correctAudio;
-SoundFile wrongAudio;
 
 boolean showOptions = false;
 
@@ -81,8 +104,6 @@ void draw ( ) {
     text(optionsList[level][2],width / 3.2,695); //option C
   }
   
-  correctAudio = new SoundFile(this, "correct.wav");
-  wrongAudio = new SoundFile(this, "wrong.wav");
   if(gameCompleted){
     String scoreString = "Score: " + score;
     text(scoreString, width / 3.2,460); //option A
@@ -106,11 +127,9 @@ void setText(float guess){
     print("the answer", answers[level]);
     if(guess == answers[level]){
       myPort.write('1');
-      correctAudio.play();
       score++;
     }else{
       myPort.write('0');
-       wrongAudio.play();
     }
   }
   
