@@ -10,7 +10,6 @@ This is a fun trivia game made with the Arduino and Processor made from Processo
 - Around 20 jumper wires
 - 5 220ohm resistors
 - 3 Buttons
-- I2C LCD
 
 ## Schematic
 
@@ -34,9 +33,11 @@ Add writing here
 
 ## Completed Project
 
+![trivia game photo](https://github.com/angelina-tsuboi/4N35_LED_Control/blob/main/images/final.jpg)
+
 ![project photo](https://github.com/angelina-tsuboi/4N35_LED_Control/blob/main/images/final.jpg)
 
 ## Sources
 
-[LCD display tutorial](https://www.instructables.com/How-to-Connect-I2C-Lcd-Display-to-Arduino-Uno/)
+[arduino/processor communication source](https://maker.pro/arduino/tutorial/how-to-make-arduino-and-processing-ide-communicate)
 
