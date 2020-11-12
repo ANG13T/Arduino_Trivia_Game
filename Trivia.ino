@@ -19,21 +19,35 @@ void setup() {
   Serial.begin(9600);
   lcd.init();
   lcd.backlight();
+  lcd.print("UWU");
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  digitalWrite(greenLight, HIGH);
-  digitalWrite(redLight, HIGH);
-  if(digitalRead(button1) == "HIGH"){
-    Serial.println("button presed");
+  
+  if(digitalRead(button1) == HIGH){
+    Serial.println("1");
   }
 
-  if(digitalRead(button2) == "HIGH"){
-    Serial.println("button presed");
+  if(digitalRead(button2) == HIGH){
+    Serial.println("2");
   }
 
-  if(digitalRead(button3) == "HIGH"){
-    Serial.println("button presed");
+  if(digitalRead(button3) == HIGH){
+    Serial.println("3");
   }
+
+  if (Serial.available ( ) > 0) {   // Checking if the Processing IDE has send a value or not
+    char state = Serial.read ( );    // Reading the data received and saving in the state variable
+    
+    if(state == '1') { 
+      digitalWrite (redLight, HIGH); 
+    }  
+    
+    if (state == '0') {     // If received data is '0', then turn off led
+     digitalWrite (redLight, LOW);
+    } 
+} 
+
+  delay(500);
 }
