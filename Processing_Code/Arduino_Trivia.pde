@@ -59,7 +59,6 @@ String currentText = "Press any button to continue.";
 PImage icon;
 PImage options;
 
-
 boolean showOptions = false;
 
 void setup ( ) {
@@ -78,23 +77,19 @@ myPort.bufferUntil ( '\n' );   // Receiving the data from the Arduino IDE
 
 void serialEvent  (Serial myPort) {
   String guess = myPort.readStringUntil('\n');
-  println("the input", guess);
   float numGuess;
   if(guess.length() > 0){
     numGuess = float(guess);
-    println("the input 2", numGuess);
     setText(numGuess);
   }
 } 
 
 
 void draw ( ) {
-
   background(0,0,0);
   textFont(currentQuestion,30);                  
   fill(255, 255, 255);
   textAlign(CENTER);
-  //text(currentText,width / 4,350);
   text(currentText,width / 2.2,370); 
   image(icon, width/7.3, 0, width/1.5, height/2.4);
   if(showOptions){
@@ -123,8 +118,6 @@ void setText(float guess){
   }
   
   if(level > -1 && !gameCompleted){
-    print("the guess", guess);
-    print("the answer", answers[level]);
     if(guess == answers[level]){
       myPort.write('1');
       score++;
@@ -136,7 +129,6 @@ void setText(float guess){
   if(level + 1 >= questions.length || gameCompleted){
     currentText = "You completed the game!";
     showOptions = false;
-    println("Your score", score);
     gameCompleted = true;
     return;
   }
