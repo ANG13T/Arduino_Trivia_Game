@@ -13,7 +13,7 @@ This is a fun trivia game made with the Arduino and Processor made from Processo
 
 ## Schematic
 
-![design image](https://github.com/angelina-tsuboi/4N35_LED_Control/blob/main/images/design.png)
+![design image](https://github.com/angelina-tsuboi/Trivia_Processor/blob/master/images/design.png)
 
 ## How It Works
 
@@ -33,9 +33,9 @@ Add writing here
 
 ## Completed Project
 
-![trivia game photo](https://github.com/angelina-tsuboi/4N35_LED_Control/blob/main/images/final.jpg)
+![trivia game photo](https://github.com/angelina-tsuboi/Trivia_Processor/blob/master/images/gui.png)
 
-![project photo](https://github.com/angelina-tsuboi/4N35_LED_Control/blob/main/images/final.jpg)
+![project photo](https://github.com/angelina-tsuboi/Trivia_Processor/blob/master/images/final.jpg)
 
 ## Sources
 
