@@ -1,8 +1,12 @@
 import processing.serial.*;    // Importing the serial library to communicate with the Arduino 
+import processing.sound.*;
+
 
 Serial myPort;      // Initializing a vairable named 'myPort' for serial communication
 
 int level = -1; //level of questions
+int score = 0;
+boolean gameCompleted = false;
 
 String[] questions = {"What is the meaning of life?", "What is 2 + 2?", "How many letters compose: dog?"};
 String[][] optionsList = {  {
@@ -29,6 +33,9 @@ String currentText = "Press any button to continue.";
 
 PImage icon;
 PImage options;
+
+SoundFile correctAudio;
+SoundFile wrongAudio;
 
 boolean showOptions = false;
 
@@ -58,8 +65,6 @@ void serialEvent  (Serial myPort) {
 } 
 
 
-
-
 void draw ( ) {
 
   background(0,0,0);
@@ -75,27 +80,51 @@ void draw ( ) {
     text(optionsList[level][1],width / 3.2,580); //option B
     text(optionsList[level][2],width / 3.2,695); //option C
   }
+  
+  correctAudio = new SoundFile(this, "correct.wav");
+  wrongAudio = new SoundFile(this, "wrong.wav");
+  if(gameCompleted){
+    String scoreString = "Score: " + score;
+    text(scoreString, width / 3.2,460); //option A
+    text("Press a button to play again!", width / 2,580); //option B
+  }
 }
 
 void setText(float guess){
   
-  if(level > -1){
+  if(gameCompleted){
+    showOptions = true;
+    level = 0;
+    score = 0;
+    gameCompleted = false;
+    currentText = questions[0];
+    return;
+  }
+  
+  if(level > -1 && !gameCompleted){
     print("the guess", guess);
     print("the answer", answers[level]);
     if(guess == answers[level]){
       myPort.write('1');
+      correctAudio.play();
+      score++;
     }else{
       myPort.write('0');
+       wrongAudio.play();
     }
   }
   
+  if(level + 1 >= questions.length || gameCompleted){
+    currentText = "You completed the game!";
+    showOptions = false;
+    println("Your score", score);
+    gameCompleted = true;
+    return;
+  }
+ 
+  
   showOptions = true;
   level++;
-  print("lvel", level);
-  
-  if(level == questions.length){
-    level = 0;
-  }
   currentText = questions[level];
 }
 
